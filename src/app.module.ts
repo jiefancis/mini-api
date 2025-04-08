@@ -4,6 +4,9 @@ import { AppService } from './app.service';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { CacheModule } from '@nestjs/cache-manager';
+
+import redisClient from './common/redis';
 
 import { UserModule } from './modules/user/user.module';
 import { ShopModule } from './modules/shop/shop.module';
@@ -14,6 +17,7 @@ import { GoodCategoryModule } from './modules/good_category/good_category.module
 import { CouponModule } from './modules/coupon/coupon.module';
 import { CollectionModule } from './modules/collection/collection.module';
 import { AddressModule } from './modules/address/address.module';
+import { HealthModule } from './modules/health/health.module';
 
 // import { User } from './entities/user.entity';
 // import { Shop } from './entities/shop.entity';
@@ -27,6 +31,17 @@ import { AddressModule } from './modules/address/address.module';
 
 @Module({
   imports: [
+    // 缓存
+    CacheModule.register({
+      isGlobal: true, // 配置全局缓存
+      // store: {
+      //   create: () => ({
+      //     get: (key) => redisClient.get(key),
+      //     set: (key, value, ttl) => redisClient.setex(key, ttl, value),
+      //     del: (key) => redisClient.del(key),
+      //   }),
+      // },
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: `.env.${process.env.NODE_ENV}`,
@@ -90,6 +105,7 @@ import { AddressModule } from './modules/address/address.module';
     CouponModule,
     CollectionModule,
     AddressModule,
+    HealthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -2,9 +2,11 @@ import { Repository } from 'typeorm';
 
 export class BaseService {
   repository: Repository<any>;
+  c;
 
   constructor(repository) {
     this.repository = repository;
+    // this.cacheManager = cacheManager;
   }
 
   async create(data) {
