@@ -2,10 +2,13 @@ import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { GoodGroupService } from './good_group.service';
 import { GoodCreateDto } from 'src/dto/good.dto';
 import { plainToClass } from 'class-transformer';
+import { BaseController } from 'src/common/baseController';
 
 @Controller('goodGroup')
-export class GoodGroupController {
-  constructor(private readonly service: GoodGroupService) {}
+export class GoodGroupController extends BaseController {
+  constructor(readonly service: GoodGroupService) {
+    super(service);
+  }
 
   @Post('v1/create')
   async create(@Body() data: GoodCreateDto) {

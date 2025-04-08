@@ -40,10 +40,14 @@ export class BaseService {
   async listPage(params) {
     if (this.repository) {
       const { offset, pageSize, order, sort } = params;
+      const orderBy = {};
+      if (order && sort) {
+        orderBy[sort] = order;
+      }
       return await this.repository.find({
         skip: offset,
         take: pageSize,
-        order: { [sort]: order },
+        order: orderBy,
       });
     }
   }

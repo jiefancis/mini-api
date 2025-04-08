@@ -2,15 +2,16 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../../entities/user.entity';
+import { BaseService } from 'src/common/baseService';
 
 @Injectable()
-export class UserService {
-  constructor(
-    @InjectRepository(User) private userRepository: Repository<User>,
-  ) {}
+export class UserService extends BaseService {
+  constructor(@InjectRepository(User) readonly repository: Repository<User>) {
+    super(repository);
+  }
 
   async queryAllUser() {
-    const list = await this.userRepository.find();
+    const list = await this.repository.find();
 
     if (list?.length) {
       return list;
@@ -20,7 +21,7 @@ export class UserService {
 
   async queryUserById(id) {
     // const user = await this.userRepository.findOne(id);
-    const user = await this.userRepository.findOne({
+    const user = await this.repository.findOne({
       where: {
         id,
       },
@@ -31,20 +32,9 @@ export class UserService {
     return null;
   }
 
-  async createUser(data) {
-    try {
-      // const user = await this.userRepository.create(data);
-      const res = await this.userRepository.save(data);
-      console.log('创建用户res::', res);
-      return res;
-    } catch (error) {
-      console.log('创建用户失败::', error);
-    }
-  }
-
   async updateUserById(id, data) {
     try {
-      const res = await this.userRepository.update(id, data);
+      const res = await this.repository.update(id, data);
       console.log('更新用户res::', res);
       return res;
     } catch (error) {

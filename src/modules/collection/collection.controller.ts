@@ -2,10 +2,13 @@ import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CollectionService } from './collection.service';
 import { GoodCreateDto } from 'src/dto/good.dto';
 import { plainToClass } from 'class-transformer';
+import { BaseController } from 'src/common/baseController';
 
 @Controller('collection')
-export class CollectionController {
-  constructor(private readonly service: CollectionService) {}
+export class CollectionController extends BaseController {
+  constructor(readonly service: CollectionService) {
+    super(service);
+  }
 
   @Post('v1/create')
   async create(@Body() data: GoodCreateDto) {

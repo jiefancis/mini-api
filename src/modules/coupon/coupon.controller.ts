@@ -2,10 +2,13 @@ import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CouponService } from './coupon.service';
 import { GoodCreateDto } from 'src/dto/good.dto';
 import { plainToClass } from 'class-transformer';
+import { BaseController } from 'src/common/baseController';
 
 @Controller('coupon')
-export class CouponController {
-  constructor(private readonly service: CouponService) {}
+export class CouponController extends BaseController {
+  constructor(readonly service: CouponService) {
+    super(service);
+  }
 
   @Post('v1/create')
   async create(@Body() data: GoodCreateDto) {

@@ -1,28 +1,22 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { UserService } from './user.service';
-
+import { BaseController } from 'src/common/baseController';
 @Controller('user')
-export class UserController {
-  constructor(private userService: UserService) {}
-
-  // 查询所有用户
-  @Get('v1/queryAllUser')
-  async queryAllUser() {
-    console.log('进入userController');
-    const users = await this.userService.queryAllUser();
-    return users;
+export class UserController extends BaseController {
+  constructor(readonly service: UserService) {
+    super(service);
   }
 
   @Get('v1/queryUserById')
   async queryUserById() {
-    const user = await this.userService?.queryUserById?.(1);
+    const user = await this.service?.queryUserById?.(1);
     return user;
   }
 
   // 用户注册
-  @Post('v1/registry')
+  @Post('v1/register')
   async createUser(@Body() data) {
-    const res = await this.userService.createUser(data);
+    const res = await this.service.create(data);
     return res;
   }
 
@@ -32,7 +26,7 @@ export class UserController {
     const userId = data.id;
     delete data.id;
 
-    const res = await this.userService.updateUserById(userId, data);
+    const res = await this.service.updateUserById(userId, data);
     return res;
   }
 }

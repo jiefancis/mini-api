@@ -2,10 +2,13 @@ import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { ShopService } from './shop.service';
 import { GoodCreateDto } from 'src/dto/good.dto';
 import { plainToClass } from 'class-transformer';
+import { BaseController } from 'src/common/baseController';
 
 @Controller('shop')
-export class ShopController {
-  constructor(private readonly service: ShopService) {}
+export class ShopController extends BaseController {
+  constructor(readonly service: ShopService) {
+    super(service);
+  }
 
   @Post('v1/create')
   async create(@Body() data: GoodCreateDto) {
