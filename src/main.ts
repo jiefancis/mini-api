@@ -17,9 +17,10 @@ async function bootstrap() {
   // 全局作用域管道 dto 验证有关
   app.useGlobalPipes(new ValidationPipe());
 
-  // 设置全局api前缀为 yx/v1
+  // 设置全局api前缀为 mini
   app.setGlobalPrefix(API_PREFIX);
   app.enableCors();
   await app.listen(3000);
+  console.log('app serve runing at http://localhost:3000');
 }
 bootstrap();

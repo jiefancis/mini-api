@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { ShopService } from './shop.service';
-import { GoodCreateDto } from 'src/dto/good.dto';
+import { ShopCreateDto } from 'src/dto/shop.dto';
 import { plainToClass } from 'class-transformer';
 import { BaseController } from 'src/common/baseController';
 
@@ -11,7 +11,7 @@ export class ShopController extends BaseController {
   }
 
   @Post('v1/create')
-  async create(@Body() data: GoodCreateDto) {
+  async create(@Body() data: ShopCreateDto) {
     // 1. 手动转换数据类型
 
     // if (data.validity_start && data.validity_end) {
@@ -21,23 +21,15 @@ export class ShopController extends BaseController {
 
     // 2. 使用 class-transform 的 plainToClass
 
-    const good = plainToClass(GoodCreateDto, data);
+    const good = plainToClass(ShopCreateDto, data);
 
     return this.service.create(good);
   }
 
   @Post('v1/update')
-  async update(@Body() data: Partial<GoodCreateDto>) {
+  async update(@Body() data: Partial<ShopCreateDto>) {
     const id = data.id;
     delete data.id;
-
-    if (data.validity_start) {
-      data.validity_start = new Date(data.validity_start);
-    }
-
-    if (data.validity_end) {
-      data.validity_end = new Date(data.validity_end);
-    }
 
     return this.service.update(id, data);
   }
