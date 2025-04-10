@@ -3,6 +3,7 @@ import { GoodService } from './good.service';
 import { GoodCreateDto } from 'src/dto/good.dto';
 import { plainToClass } from 'class-transformer';
 import { BaseController } from 'src/common/baseController';
+import { Like } from 'typeorm';
 
 @Controller('good')
 export class GoodController extends BaseController {
@@ -56,5 +57,10 @@ export class GoodController extends BaseController {
   async findById(@Query() data) {
     console.log('findById::', data);
     return await this.service.findOne(+data.id);
+  }
+
+  @Get('v1/findBy')
+  async findBy(@Query('search') searchText: string) {
+    return await this.service.findByName(searchText);
   }
 }

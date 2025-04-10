@@ -20,7 +20,9 @@ async function bootstrap() {
   // 设置全局api前缀为 mini
   app.setGlobalPrefix(API_PREFIX);
   app.enableCors();
-  await app.listen(3000);
-  console.log('app serve runing at http://localhost:3000');
+  await app.listen(process.env.PORT || 3000);
+  console.log(
+    `app serve runing at http://localhost:${process.env.PORT || 3000}`,
+  );
 }
 bootstrap();

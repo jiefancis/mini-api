@@ -81,21 +81,7 @@ import { HealthModule } from './modules/health/health.module';
         // },
       }),
     }),
-    // TypeOrmModule.forRoot({
-    //   type: 'mysql',
-    //   host: 'localhost',
-    //   port: 3309,
-    //   username: 'root',
-    //   password: '123456',
-    //   database: 'yuexuan',
-    //   entities: [User],
-    //   synchronize: true,
-    //   timezone: 'Asia/Shanghai', // 根据实际情况设置时区
-    //   extra: {
-    //     sql_mode:
-    //       'ONLY_FULL_GROUP_BY,ERROR_FOR_DIVISION_BY_ZERO,NO_ZERO_IN_DATE',
-    //   },
-    // }),
+
     UserModule,
     ShopModule,
     OrderModule,
