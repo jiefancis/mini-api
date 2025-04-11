@@ -1,59 +1,11 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from './base.entity';
 
 @Entity()
-export class GoodGroup {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class GoodGroup extends BaseEntity {
+  @Column({ comment: '分组id' })
+  groupId: number;
 
-  @Column({
-    type: 'varchar',
-    length: 255,
-    nullable: false,
-    comment: '分组名称',
-  })
-  name: string;
-
-  @Column({
-    type: 'varchar',
-    length: 255,
-    nullable: false,
-    comment: '分别icon',
-  })
-  icon: string;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
-
-  //   @Column()
-  //   sort: number;
-
-  //   @Column()
-  //   is_show: number;
-
-  //   @Column()
-  //   is_delete: number;
-
-  //   @Column()
-  //   create_time: Date;
-
-  //   @Column()
-  //   update_time: Date;
-
-  //   @Column()
-  //   create_user: number;
-
-  //   @Column()
-  //   update_user: number;
-
-  //   @Column()
-  //   is_hot: number;
+  @Column({ comment: '商品id' })
+  goodId: number;
 }

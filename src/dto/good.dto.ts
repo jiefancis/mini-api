@@ -101,11 +101,8 @@ export class GoodCreateDto {
   @IsOptional()
   shop_id: number;
 
-  // @IsJSON()
-  // @IsOptional()
-  @IsArray({ message: 'good_category_ids 必须是数组' })
-  @IsNumber({}, { each: true })
-  good_category_ids: Array<number>; // 前端传递时需是 JSON 字符串形式
+  @IsNumber({}, { message: '分类id不能为空' })
+  categoryId: number;
 
   // @IsJSON()
   // @IsOptional()

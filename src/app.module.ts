@@ -13,24 +13,38 @@ import { ShopModule } from './modules/shop/shop.module';
 import { OrderModule } from './modules/order/order.module';
 import { GoodModule } from './modules/good/good.module';
 import { GoodGroupModule } from './modules/good_group/good_group.module';
-import { GoodCategoryModule } from './modules/good_category/good_category.module';
+import { CategoryModule } from './modules/category/category.module';
 import { CouponModule } from './modules/coupon/coupon.module';
 import { CollectionModule } from './modules/collection/collection.module';
 import { AddressModule } from './modules/address/address.module';
 import { HealthModule } from './modules/health/health.module';
+import { GroupModule } from './modules/group/group.module';
 
-// import { User } from './entities/user.entity';
-// import { Shop } from './entities/shop.entity';
-// import { Order } from './entities/order.entity';
-// import { Good } from './entities/good.entity';
-// import { GoodGroup } from './entities/good_group.entity';
-// import { GoodCategory } from './entities/good_category.entity';
-// import { Coupon } from './entities/coupon.entity';
-// import { Collection } from './entities/collection.entity';
 // import { Address } from './entities/address.entity';
+// import { Category } from './entities/category.entity';
+// import { Collection } from './entities/collection.entity';
+// import { Coupon } from './entities/coupon.entity';
+// import { GoodGroup } from './entities/good_group.entity';
+// import { Group } from './entities/group.entity';
+// import { Good } from './entities/good.entity';
+// import { Order } from './entities/order.entity';
+// import { Shop } from './entities/shop.entity';
+// import { User } from './entities/user.entity';
 
 @Module({
   imports: [
+    // TypeOrmModule.forFeature([
+    //   Address,
+    //   Category,
+    //   Collection,
+    //   Coupon,
+    //   GoodGroup,
+    //   Group,
+    //   Good,
+    //   Order,
+    //   Shop,
+    //   User,
+    // ]),
     // 缓存
     CacheModule.register({
       isGlobal: true, // 配置全局缓存
@@ -87,11 +101,12 @@ import { HealthModule } from './modules/health/health.module';
     OrderModule,
     GoodModule,
     GoodGroupModule,
-    GoodCategoryModule,
+    CategoryModule,
     CouponModule,
     CollectionModule,
     AddressModule,
     HealthModule,
+    GroupModule,
   ],
   controllers: [AppController],
   providers: [AppService],

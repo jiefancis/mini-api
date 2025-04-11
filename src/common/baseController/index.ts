@@ -4,6 +4,7 @@ import { Cache } from 'cache-manager';
 import { RedisKeyFormat } from 'src/constants/redis';
 import { utilFormat } from 'src/utils/format';
 import redisClient from 'src/common/redis';
+import * as _ from 'lodash';
 
 export class BaseController {
   service: any;
@@ -16,13 +17,23 @@ export class BaseController {
 
   @Post('v1/listPage')
   async listPage(@Body() data: ListPageDto) {
-    const { pageNo, pageSize, ...restData } = data;
+    const { pageNo, pageSize, order, sort, ...restData } = data;
     const offset = (pageNo - 1) * pageSize;
 
+    const orderBy = {};
+    if (sort) {
+      orderBy[sort] = order || 'desc';
+    }
+
+    let where = {};
+    if (!_.isEmpty(restData)) {
+    }
+
     const queryData = {
-      offset,
-      pageSize,
-      ...restData,
+      skip: offset,
+      take: pageSize,
+      order: orderBy,
+      // ...restData,
     };
 
     return await this.service.listPage(queryData);

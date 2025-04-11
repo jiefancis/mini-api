@@ -43,19 +43,23 @@
   - 商品特殊时段 special_time
   - 商品库存stock
   - 所属店铺 shop_id
-  - 所属分类 good_category_ids []
-  - 所属分组 good_group_ids []
+  - 所属分类 categoryId
 
-- 商品分类 good_category
+- 商品分类 category
 
-  - 类别名称name
-  - 类别图片icon
-  <!-- 父级分类 parent_id -->
+  - 类别名称 name
+  - 类别图片 icon
+  - 父级分类 parentId
 
-- 商品分组 good_group
+- 商品分组 group
 
   - 分组名称name
   - 分组图片icon
+
+- 商品与分组关系 good_group
+
+  - 商品id goodId
+  - 分组id groupId
 
 - 订单order
 

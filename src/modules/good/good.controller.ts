@@ -1,9 +1,11 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { GoodService } from './good.service';
 import { GoodCreateDto } from 'src/dto/good.dto';
+import { ListPageDto } from 'src/dto/common.dto';
 import { plainToClass } from 'class-transformer';
 import { BaseController } from 'src/common/baseController';
-import { Like } from 'typeorm';
+import * as _ from 'lodash';
+import { Between, In, Like } from 'typeorm';
 
 @Controller('good')
 export class GoodController extends BaseController {
@@ -62,5 +64,41 @@ export class GoodController extends BaseController {
   @Get('v1/findBy')
   async findBy(@Query('search') searchText: string) {
     return await this.service.findByName(searchText);
+  }
+
+  @Post('v1/listPage')
+  async listPage(@Body() data: ListPageDto) {
+    const { pageNo, pageSize, order, sort, ...restData } = data;
+    const offset = (pageNo - 1) * pageSize;
+
+    const orderBy = {};
+    if (sort) {
+      orderBy[sort] = order || 'desc';
+    }
+
+    const where: Record<string, any> = {};
+
+    if (!_.isEmpty(restData)) {
+      _.keys(restData).forEach((key) => {
+        if (key === 'search') {
+          where.name = Like(`%${restData[key]}%`);
+        } else if (key === 'priceRange') {
+          where.price = Between(restData[key]?.[0], restData[key]?.[1]);
+        } else if (key === 'categoryIds') {
+          where.categoryId = In(restData[key]);
+        }
+        delete restData[key];
+      });
+    }
+
+    const queryData = {
+      skip: offset,
+      take: pageSize,
+      order: orderBy,
+      where,
+      restData,
+    };
+
+    return await this.service.listPage(queryData);
   }
 }

@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { GoodCategoryService } from './good_category.service';
+import { GoodCategoryService } from './category.service';
 import { GoodCreateDto } from 'src/dto/good.dto';
 import { plainToClass } from 'class-transformer';
 import { BaseController } from 'src/common/baseController';

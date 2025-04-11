@@ -1,10 +1,5 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity } from './base.entity';
 
 interface IServices {
   name?: string;
@@ -12,10 +7,7 @@ interface IServices {
 }
 
 @Entity()
-export class Good {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Good extends BaseEntity {
   @Column({
     type: 'varchar',
     length: 50,
@@ -39,11 +31,6 @@ export class Good {
   })
   tags: Array<string>;
 
-  // {
-  //   type: 'int',
-  //   // comment: '商品状态:1-上架,2-下架,3-售罄',
-  // //   // default: 1,
-  // // }
   @Column({
     type: 'int',
     nullable: true,
@@ -59,7 +46,7 @@ export class Good {
   // //   // default: [],
   // // }
   @Column({ type: 'json', nullable: true })
-  services: Array<IServices>; //Array<{ title?: string; content?: string }>;
+  services: Array<IServices>;
 
   @Column({
     type: 'json',
@@ -118,21 +105,8 @@ export class Good {
   @Column({ type: 'int', nullable: true, comment: '所属店铺id' })
   shop_id: number;
 
-  @Column({
-    type: 'json',
-    nullable: true,
-    comment: '商品分类id',
-    // default: [],
-  })
-  good_category_ids: Array<number | string>;
-
-  @Column({
-    type: 'json',
-    nullable: true,
-    comment: '商品分类id',
-    // default: [],
-  })
-  good_group_ids: Array<number | string>;
+  @Column({ comment: '商品分类id', nullable: true })
+  categoryId: number;
 
   @Column({
     type: 'json',
@@ -142,24 +116,4 @@ export class Good {
     // default: '[]',
   })
   package_content: Array<{ price: number; name: string; count: number }>;
-
-  // @CreateDateColumn({ type: 'timestamp', nullable: true, comment: '创建时间' })
-  // createdAt: Date;
-
-  // @UpdateDateColumn({ type: 'timestamp', nullable: true, comment: '更新时间' })
-  // updatedAt: Date;
-
-  @CreateDateColumn({
-    type: 'timestamp',
-    comment: '创建时间',
-    nullable: true,
-  })
-  createdAt: Date;
-
-  @UpdateDateColumn({
-    nullable: true,
-    type: 'timestamp',
-    comment: '更新时间',
-  })
-  updatedAt: Date;
 }
