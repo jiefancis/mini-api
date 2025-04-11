@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { GoodGroup } from '../../entities/good_group.entity';
+import { GoodGroup } from 'src/entities/good_group.entity';
 import { GoodGroupController } from './good_group.controller';
 import { GoodGroupService } from './good_group.service';
 

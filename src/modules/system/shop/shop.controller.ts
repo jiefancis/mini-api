@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { ShopService } from './shop.service';
-import { ShopCreateDto } from 'src/dto/shop.dto';
+import { ShopCreateDto } from './dto/shop.dto';
 import { plainToClass } from 'class-transformer';
 import { BaseController } from 'src/common/baseController';
 

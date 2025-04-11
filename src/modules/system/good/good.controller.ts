@@ -1,11 +1,12 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import * as _ from 'lodash';
+
 import { GoodService } from './good.service';
-import { GoodCreateDto } from 'src/dto/good.dto';
+import { GoodCreateDto } from './dto/good.dto';
 import { ListPageDto } from 'src/dto/common.dto';
 import { plainToClass } from 'class-transformer';
 import { BaseController } from 'src/common/baseController';
-import * as _ from 'lodash';
-import { Between, In, Like } from 'typeorm';
+import { listPageParamsFormat } from 'src/utils/format';
 
 @Controller('good')
 export class GoodController extends BaseController {
@@ -68,7 +69,7 @@ export class GoodController extends BaseController {
 
   @Post('v1/listPage')
   async listPage(@Body() data: ListPageDto) {
-    const { pageNo, pageSize, order, sort, groupIds = [], ...restData } = data;
+    const { pageNo, pageSize, order, sort, groupIds = [] } = data;
     const offset = (pageNo - 1) * pageSize;
 
     const orderBy = {};
@@ -76,21 +77,8 @@ export class GoodController extends BaseController {
       orderBy[sort] = order || 'desc';
     }
 
-    const where: Record<string, any> = {};
+    const where: Record<string, any> = listPageParamsFormat(data);
 
-    if (!_.isEmpty(restData)) {
-      _.keys(restData).forEach((key) => {
-        if (key === 'keyword') {
-          where.name = Like(`%${restData[key]}%`);
-        } else if (key === 'priceRange') {
-          where.price = Between(restData[key]?.[0], restData[key]?.[1]);
-        } else if (key === 'categoryIds') {
-          where.categoryId = In(restData[key]);
-        }
-      });
-    }
-
-    console.log(data, 'where?::', restData);
     const queryData = {
       skip: offset,
       take: pageSize,

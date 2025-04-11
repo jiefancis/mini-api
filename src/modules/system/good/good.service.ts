@@ -34,7 +34,7 @@ export class GoodService extends BaseService {
         where.groupId = In(groupIds);
         const goods = await this.goodGroupRepository.find({ where });
         const goodIds = goods.map((item) => item.id); // 获取商品id
-        console.log('goodIds::', goodIds);
+        // console.log('goodIds::', goodIds);
         if (goodIds.length) {
           groupWhere.id = In(goodIds);
         }

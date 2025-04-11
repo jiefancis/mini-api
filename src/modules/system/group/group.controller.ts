@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { GoodGroupService } from './group.service';
-import { GroupCreateDto } from 'src/dto/group.dto';
+import { GroupCreateDto } from './dto/group.dto';
 import { BaseController } from 'src/common/baseController';
 
 @Controller('group')

@@ -6,19 +6,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CacheModule } from '@nestjs/cache-manager';
 
-import redisClient from './common/redis';
-
-import { UserModule } from './modules/user/user.module';
-import { ShopModule } from './modules/shop/shop.module';
-import { OrderModule } from './modules/order/order.module';
-import { GoodModule } from './modules/good/good.module';
-import { GoodGroupModule } from './modules/good_group/good_group.module';
-import { CategoryModule } from './modules/category/category.module';
-import { CouponModule } from './modules/coupon/coupon.module';
-import { CollectionModule } from './modules/collection/collection.module';
-import { AddressModule } from './modules/address/address.module';
-import { HealthModule } from './modules/health/health.module';
-import { GroupModule } from './modules/group/group.module';
+import { UserModule } from './modules/system/user/user.module';
+import { ShopModule } from './modules/system/shop/shop.module';
+import { OrderModule } from './modules/system/order/order.module';
+import { GoodModule } from './modules/system/good/good.module';
+import { GoodGroupModule } from './modules/system/good_group/good_group.module';
+import { CategoryModule } from './modules/system/category/category.module';
+import { CouponModule } from './modules/system/coupon/coupon.module';
+import { CollectionModule } from './modules/system/collection/collection.module';
+import { AddressModule } from './modules/system/address/address.module';
+import { HealthModule } from './modules/system/health/health.module';
+import { GroupModule } from './modules/system/group/group.module';
+import { RedisModule } from './modules/redis/redis.module';
 
 // import { Address } from './entities/address.entity';
 // import { Category } from './entities/category.entity';
@@ -107,6 +106,7 @@ import { GroupModule } from './modules/group/group.module';
     AddressModule,
     HealthModule,
     GroupModule,
+    RedisModule,
   ],
   controllers: [AppController],
   providers: [AppService],

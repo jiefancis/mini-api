@@ -1,17 +1,15 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { GoodCategoryService } from './category.service';
-import { GoodCreateDto } from 'src/dto/good.dto';
-import { plainToClass } from 'class-transformer';
+import { CouponService } from './coupon.service';
 import { BaseController } from 'src/common/baseController';
 
-@Controller('category')
-export class GoodCategoryController extends BaseController {
-  constructor(readonly service: GoodCategoryService) {
+@Controller('coupon')
+export class CouponController extends BaseController {
+  constructor(readonly service: CouponService) {
     super(service);
   }
 
   @Post('v1/update')
-  async update(@Body() data: Partial<GoodCreateDto>) {
+  async update(@Body() data) {
     const id = data.id;
     delete data.id;
 

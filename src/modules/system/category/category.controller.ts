@@ -1,12 +1,11 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
-import { GoodGroupService } from './good_group.service';
+import { GoodCategoryService } from './category.service';
 import { GoodCreateDto } from 'src/dto/good.dto';
-import { plainToClass } from 'class-transformer';
 import { BaseController } from 'src/common/baseController';
 
-@Controller('goodGroup')
-export class GoodGroupController extends BaseController {
-  constructor(readonly service: GoodGroupService) {
+@Controller('category')
+export class GoodCategoryController extends BaseController {
+  constructor(readonly service: GoodCategoryService) {
     super(service);
   }
 
