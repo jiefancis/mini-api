@@ -80,7 +80,7 @@ export class GoodController extends BaseController {
 
     if (!_.isEmpty(restData)) {
       _.keys(restData).forEach((key) => {
-        if (key === 'search') {
+        if (key === 'keyword') {
           where.name = Like(`%${restData[key]}%`);
         } else if (key === 'priceRange') {
           where.price = Between(restData[key]?.[0], restData[key]?.[1]);
@@ -91,6 +91,7 @@ export class GoodController extends BaseController {
       });
     }
 
+    // console.log('where?::', where);
     const queryData = {
       skip: offset,
       take: pageSize,

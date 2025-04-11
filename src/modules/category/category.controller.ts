@@ -4,26 +4,10 @@ import { GoodCreateDto } from 'src/dto/good.dto';
 import { plainToClass } from 'class-transformer';
 import { BaseController } from 'src/common/baseController';
 
-@Controller('goodCategory')
+@Controller('category')
 export class GoodCategoryController extends BaseController {
   constructor(readonly service: GoodCategoryService) {
     super(service);
-  }
-
-  @Post('v1/create')
-  async create(@Body() data: GoodCreateDto) {
-    // 1. 手动转换数据类型
-
-    // if (data.validity_start && data.validity_end) {
-    //   data.validity_start = new Date(data.validity_start);
-    //   data.validity_end = new Date(data.validity_end);
-    // }
-
-    // 2. 使用 class-transform 的 plainToClass
-
-    const good = plainToClass(GoodCreateDto, data);
-
-    return this.service.create(good);
   }
 
   @Post('v1/update')

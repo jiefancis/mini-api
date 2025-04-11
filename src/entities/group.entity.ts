@@ -14,7 +14,7 @@ export class Group extends BaseEntity {
   @Column({
     type: 'varchar',
     length: 255,
-    nullable: false,
+    nullable: true,
     comment: '分组icon',
   })
   icon: string;

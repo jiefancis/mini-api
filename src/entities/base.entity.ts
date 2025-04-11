@@ -11,7 +11,7 @@ export class BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'boolean', comment: '是否删除' })
+  @Column({ type: 'boolean', comment: '是否删除', default: false })
   isDeleted: boolean;
 
   @CreateDateColumn({

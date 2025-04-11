@@ -29,7 +29,7 @@ export class ListPageDto {
   // 关键字搜索
   @IsOptional()
   @IsString({ message: '搜索关键字必须为字符串' })
-  search: string;
+  keyword: string;
 
   // 价格区间
   @IsOptional()

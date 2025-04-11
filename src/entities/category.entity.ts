@@ -14,8 +14,9 @@ export class Category extends BaseEntity {
   @Column({
     type: 'varchar',
     length: 255,
-    nullable: false,
+    nullable: true,
     comment: '类别icon',
+    default: '',
   })
   icon: string;
 

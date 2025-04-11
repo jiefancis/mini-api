@@ -15,6 +15,11 @@ export class BaseController {
     this.cacheManager = cacheManager;
   }
 
+  @Post('v1/create')
+  async create(@Body() data) {
+    return this.service.create(data);
+  }
+
   @Post('v1/listPage')
   async listPage(@Body() data: ListPageDto) {
     const { pageNo, pageSize, order, sort, ...restData } = data;
