@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import Redis from 'ioredis';
+import { RedisExpire } from 'src/constants/redis';
 
 @Injectable()
 export class RedisService {
@@ -25,7 +26,12 @@ export class RedisService {
     if (typeof value == 'object') {
       value = JSON.stringify(value);
     }
-    return await this.redisClient.set(key, value, 'PX', milliseconds);
+    return await this.redisClient.set(
+      key,
+      value,
+      'PX',
+      milliseconds || RedisExpire.UserCache,
+    );
   }
   /**
    * 获取redis缓存

@@ -5,7 +5,8 @@ import { PostStatusInterceptor } from './common/interceptors/postStatus.intercep
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ValidationPipe } from '@nestjs/common';
 import { API_PREFIX } from 'src/config/api';
-import { JwtGuard } from 'src/common/guards/auth.guard';
+// import { JwtGuard } from 'src/common/guards/auth.guard';
+import * as session from 'express-session';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -23,6 +24,18 @@ async function bootstrap() {
 
   // 全局守卫
   // app.useGlobalGuards(new JwtGuard());
+
+  // 会话存储
+  app.use(
+    session({
+      secret: 'SID',
+      resave: false,
+      saveUninitialized: true,
+      cookie: { secure: false, maxAge: 24 * 60 * 60 * 1000 },
+    }),
+  );
+
+  // 跨域
   app.enableCors();
   await app.listen(process.env.PORT || 3000);
   console.log(

@@ -13,7 +13,7 @@ export class UserService extends BaseService {
   }
 
   async queryAllUser() {
-    const list = await this.repository.find();
+    const list = await this.repository.find({ where: { isDeleted: false } });
 
     if (list?.length) {
       return list;
@@ -37,14 +37,15 @@ export class UserService extends BaseService {
   async updateUserById(id, data) {
     try {
       const res = await this.repository.update(id, data);
-      console.log('更新用户res::', res);
+      // console.log('更新用户res::', res);
       return res;
     } catch (error) {
-      console.log('更新用户失败::', error);
+      // console.log('更新用户失败::', error);
     }
   }
 
-  async findOne(where) {
-    return await this.repository.findOne(where);
+  async findOne(options) {
+    options.where.isDeleted = false;
+    return await this.repository.findOne(options);
   }
 }
