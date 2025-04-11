@@ -68,7 +68,7 @@ export class GoodController extends BaseController {
 
   @Post('v1/listPage')
   async listPage(@Body() data: ListPageDto) {
-    const { pageNo, pageSize, order, sort, ...restData } = data;
+    const { pageNo, pageSize, order, sort, groupIds = [], ...restData } = data;
     const offset = (pageNo - 1) * pageSize;
 
     const orderBy = {};
@@ -87,17 +87,16 @@ export class GoodController extends BaseController {
         } else if (key === 'categoryIds') {
           where.categoryId = In(restData[key]);
         }
-        delete restData[key];
       });
     }
 
-    // console.log('where?::', where);
+    console.log(data, 'where?::', restData);
     const queryData = {
       skip: offset,
       take: pageSize,
       order: orderBy,
       where,
-      restData,
+      groupIds,
     };
 
     return await this.service.listPage(queryData);

@@ -26,14 +26,21 @@ export class GoodService extends BaseService {
 
   async listPage(params) {
     if (this.repository) {
-      const { restData } = params;
+      const { groupIds } = params;
 
-      if (restData.groupIds?.length) {
+      const groupWhere: Record<string, any> = {};
+      if (groupIds?.length) {
         const where: Record<string, any> = {};
-        where.groupId = In(restData.groupIds);
-        // const goods = await this.goodGroupRepository.find({ where });
+        where.groupId = In(groupIds);
+        const goods = await this.goodGroupRepository.find({ where });
+        const goodIds = goods.map((item) => item.id); // 获取商品id
+        console.log('goodIds::', goodIds);
+        if (goodIds.length) {
+          groupWhere.id = In(goodIds);
+        }
       }
-      delete params.restData;
+
+      params.where = [params.where, groupWhere];
       const list = await this.repository.find({ ...params });
       return list;
     }
