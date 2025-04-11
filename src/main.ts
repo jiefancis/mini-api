@@ -22,7 +22,7 @@ async function bootstrap() {
   app.setGlobalPrefix(API_PREFIX);
 
   // 全局守卫
-  app.useGlobalGuards(new JwtGuard());
+  // app.useGlobalGuards(new JwtGuard());
   app.enableCors();
   await app.listen(process.env.PORT || 3000);
   console.log(

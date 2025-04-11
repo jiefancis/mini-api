@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { CacheModule } from '@nestjs/cache-manager';
+import { APP_GUARD } from '@nestjs/core';
 
 import { UserModule } from './modules/system/user/user.module';
 import { ShopModule } from './modules/system/shop/shop.module';
@@ -18,6 +19,8 @@ import { AddressModule } from './modules/system/address/address.module';
 import { HealthModule } from './modules/system/health/health.module';
 import { GroupModule } from './modules/system/group/group.module';
 import { RedisModule } from './modules/redis/redis.module';
+
+import { JwtGuard } from './common/guards/auth.guard';
 
 // import { Address } from './entities/address.entity';
 // import { Category } from './entities/category.entity';
@@ -109,6 +112,12 @@ import { RedisModule } from './modules/redis/redis.module';
     RedisModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_GUARD,
+      useClass: JwtGuard,
+    },
+  ],
 })
 export class AppModule {}

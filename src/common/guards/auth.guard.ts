@@ -9,49 +9,40 @@ import {
 import { Observable } from 'rxjs';
 import { Request } from 'express';
 import { jwtVerify } from 'src/utils/jwt';
+import { Reflector } from '@nestjs/core';
+import { IS_PRIVATE_KEY } from '../decorator/public.decorator';
 
 @Injectable()
 export class JwtGuard implements CanActivate {
-  private readonly checkUrls: string[] = [
-    // '/mini/order/v1/create',
-    // '/mini/order/v1/list',
-  ];
+  constructor(private reflector: Reflector) {}
 
-  canActivate(
-    context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
+  async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
-    const requestUrl = request.url;
+    // const requestUrl = request.url;
 
-    // todo 待补充
-    const verifyUrls = ['/mini/order', '/mini/coupon', '/mini/collection'];
-    if (!verifyUrls.some((url) => requestUrl.startsWith(url))) {
+    const isPrivate = this.reflector.getAllAndOverride<boolean>(
+      IS_PRIVATE_KEY,
+      [context.getHandler(), context.getClass()],
+    );
+
+    if (!isPrivate) {
       return true;
     }
 
     const token = this.extractTokenFromHeader(request);
+
     if (!token) {
       throw new UnauthorizedException('未登录');
     }
+
     // TODO: 验证token
-    try {
-      jwtVerify(token).then((res) => {
-        if (!res) {
-          throw new HttpException(
-            'token已过期',
-            HttpStatus.INTERNAL_SERVER_ERROR,
-          );
-          //   throw new UnauthorizedException('token已过期');
-          return false;
-        }
-        request.user = res;
-        return true;
-      });
-    } catch (err) {
-      //   throw new UnauthorizedException('token已过期');
+    const res = await jwtVerify(token);
+
+    if (!res) {
       throw new HttpException('token已过期', HttpStatus.INTERNAL_SERVER_ERROR);
-      return false;
     }
+
+    request.user = res;
     return true;
   }
 

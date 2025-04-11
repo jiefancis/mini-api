@@ -11,10 +11,10 @@ export const jwtVerify = async (token) => {
   return new Promise((resolve) => {
     jwt.verify(token, secret, (err, decoded) => {
       if (err) {
-        console.log('验证失败:', err.message);
+        // console.log('验证失败:', err.message);
         resolve(false);
       } else {
-        console.log('验证成功:', decoded);
+        // console.log('验证成功:', decoded);
         resolve(decoded);
       }
     });

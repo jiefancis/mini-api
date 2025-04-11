@@ -1,7 +1,9 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { OrderService } from './order.service';
 import { BaseController } from 'src/common/baseController';
+import { Private } from 'src/common/decorator/public.decorator';
 
+@Private()
 @Controller('order')
 export class OrderController extends BaseController {
   constructor(readonly service: OrderService) {
