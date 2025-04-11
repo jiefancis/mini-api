@@ -5,6 +5,7 @@ import { PostStatusInterceptor } from './common/interceptors/postStatus.intercep
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ValidationPipe } from '@nestjs/common';
 import { API_PREFIX } from 'src/config/api';
+import { JwtGuard } from 'src/common/guards/auth.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -19,6 +20,9 @@ async function bootstrap() {
 
   // 设置全局api前缀为 mini
   app.setGlobalPrefix(API_PREFIX);
+
+  // 全局守卫
+  app.useGlobalGuards(new JwtGuard());
   app.enableCors();
   await app.listen(process.env.PORT || 3000);
   console.log(

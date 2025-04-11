@@ -43,4 +43,8 @@ export class UserService extends BaseService {
       console.log('更新用户失败::', error);
     }
   }
+
+  async findOne(where) {
+    return await this.repository.findOne(where);
+  }
 }

@@ -11,13 +11,13 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   nickname: string; // 昵称
 
   @Column()
   password: string; // 密码
 
-  @Column()
+  @Column({ nullable: true })
   avatar: string; // 头像
 
   @Column({ default: 1, comment: '1 男 0 女' })
