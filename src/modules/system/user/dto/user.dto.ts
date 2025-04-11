@@ -16,6 +16,7 @@ export class UserLoginDto {
 
   @IsString()
   @Length(1, 50, { message: '密码长度在1到50之间' })
+  @Matches(/^[a-zA-Z0-9_]+$/, { message: '密码由字母数字下划线组成' })
   password: string; // 密码
 }
 
