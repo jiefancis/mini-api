@@ -15,7 +15,7 @@ export const jwtVerify = async (token) => {
         resolve(false);
       } else {
         console.log('验证成功:', decoded);
-        resolve(true);
+        resolve(decoded);
       }
     });
   });

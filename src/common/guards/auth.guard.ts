@@ -44,6 +44,7 @@ export class JwtGuard implements CanActivate {
           //   throw new UnauthorizedException('token已过期');
           return false;
         }
+        request.user = res;
         return true;
       });
     } catch (err) {
@@ -55,7 +56,8 @@ export class JwtGuard implements CanActivate {
   }
 
   private extractTokenFromHeader(request: Request): string | undefined {
-    const [type, token] = request.headers.authorization?.split(' ')?.[1];
-    return type === 'Bearer' ? token : undefined;
+    const token = request.headers.authorization?.split('Bearer')?.[1]?.trim();
+
+    return token;
   }
 }
