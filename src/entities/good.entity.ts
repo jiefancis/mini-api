@@ -15,6 +15,9 @@ export class Good extends BaseEntity {
   })
   name: string;
 
+  @Column({ comment: '商品描述', default: '' })
+  description: string;
+
   @Column({ type: 'float', comment: '商品价格', default: 0.0 })
   price: number;
 

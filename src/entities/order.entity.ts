@@ -20,10 +20,10 @@ export class Order {
   @Column({ comment: '订单金额' })
   amount: number;
 
-  @Column({ comment: '购买数量' })
+  @Column({ comment: '购买数量', default: 1 })
   count: number;
 
-  @Column({ comment: '优惠金额' })
+  @Column({ comment: '优惠金额', default: 0 })
   discount_amount: number;
 
   @Column({ comment: '支付金额' })
@@ -46,7 +46,12 @@ export class Order {
   @Column({ type: 'timestamp', nullable: true, comment: '支付时间' })
   payAt: Date;
 
-  @Column({ type: 'timestamp', nullable: true, comment: '发货时间' })
+  @Column({
+    type: 'timestamp',
+    nullable: true,
+    comment: '发货时间',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   sendAt: Date;
 
   @Column({ type: 'timestamp', nullable: true, comment: '更新时间' })

@@ -78,6 +78,46 @@ export class UserController extends BaseController {
     };
   }
 
+  // wxLogin , 后续补充微信登录
+  @Post('v1/wxLogin')
+  async wxLogin(@Body() data) {
+    const { phone } = data;
+    const user = await this.service.findOne({
+      where: { phone },
+    });
+    console.log('wxLogin::user', phone, user);
+
+    if (user) {
+      const accessToken = await jwtSign(user);
+      return {
+        userInfo: data,
+        accessToken,
+        message: '登录成功',
+      };
+    }
+
+    const userInfo = {
+      phone,
+      nickname: Date.now().toString(32),
+      password: '123456aBc',
+      avatar: null,
+      email: null,
+      gender: 1,
+      isDeleted: false,
+    };
+    try {
+      const res = await this.createUser(userInfo);
+      console.log('创建新用户::', res);
+      const accessToken = await jwtSign(userInfo);
+      return {
+        accessToken,
+        message: '登录成功',
+      };
+    } catch (error) {
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+
   // 退出登录
   @Post('v1/logout')
   async logout(@Req() req: Request) {

@@ -1,13 +1,36 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
+import { plainToClass } from 'class-transformer';
+
 import { OrderService } from './order.service';
 import { BaseController } from 'src/common/baseController';
-import { Private } from 'src/common/decorator/public.decorator';
+import { Private, Public } from 'src/common/decorator/public.decorator';
+import { CreateOrderDto } from './dto/order.dto';
+import { generateUUID } from 'src/utils/random';
 
 @Private()
 @Controller('order')
 export class OrderController extends BaseController {
   constructor(readonly service: OrderService) {
     super(service);
+  }
+
+  @Public()
+  @Get('v1/list')
+  async list() {
+    return this.service.findAll();
+  }
+
+  @Post('v1/create')
+  async create(@Body() data: CreateOrderDto) {
+    const payload = plainToClass(CreateOrderDto, data);
+    const res = await this.service.create(payload);
+    if (res) {
+      console.log('create-order::', res);
+      const orderNo = generateUUID();
+      return {
+        orderNo,
+      };
+    }
   }
 
   @Post('v1/update')

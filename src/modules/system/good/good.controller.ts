@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpException,
+  HttpStatus,
+  Post,
+  Query,
+} from '@nestjs/common';
 import * as _ from 'lodash';
 
 import { GoodService } from './good.service';
@@ -56,10 +64,13 @@ export class GoodController extends BaseController {
     return await this.service.findAll();
   }
 
-  @Get('v1/findById')
-  async findById(@Query() data) {
-    console.log('findById::', data);
-    return await this.service.findOne(+data.id);
+  @Get('v1/detail')
+  async findById(@Query('id') id) {
+    const good = await this.service.findOne(+id);
+    if (good.isDeleted) {
+      return new HttpException('商品已删除', HttpStatus.NOT_FOUND);
+    }
+    return good;
   }
 
   @Get('v1/findBy')
@@ -81,12 +92,18 @@ export class GoodController extends BaseController {
 
     const queryData = {
       skip: offset,
-      take: pageSize,
+      take: pageSize + 1, // c端使用 size + 1 来判断是否还有更多数据
       order: orderBy,
       where,
       groupIds,
     };
 
-    return await this.service.listPage(queryData);
+    const list = await this.service.listPage(queryData);
+    const hasMore = list.length > pageSize;
+
+    return {
+      list,
+      hasMore,
+    };
   }
 }

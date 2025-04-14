@@ -47,6 +47,10 @@ export class GoodCreateDto {
   @IsString()
   name: string;
 
+  @IsOptional()
+  @IsString({ message: '商品描述为字符串' })
+  description: string;
+
   @IsNumber()
   price: number;
 

@@ -37,9 +37,9 @@ export class JwtGuard implements CanActivate {
 
     // TODO: 验证token
     const res = await jwtVerify(token);
-
+    // console.log(token, 'token::', res);
     if (!res) {
-      throw new HttpException('token已过期', HttpStatus.INTERNAL_SERVER_ERROR);
+      throw new HttpException('token已过期', HttpStatus.UNAUTHORIZED);
     }
 
     request.user = res;

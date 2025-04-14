@@ -18,6 +18,8 @@ export const listPageParamsFormat = (data) => {
       } else if (key === 'categoryIds' && data[key]?.length) {
         // WHERE categoryId id IN (1, 2, 3, 4)
         where.categoryId = In(data[key]);
+      } else if (key === 'categoryId') {
+        where.categoryId = data[key];
       }
     });
   }
