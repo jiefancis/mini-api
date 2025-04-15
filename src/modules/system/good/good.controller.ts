@@ -100,6 +100,9 @@ export class GoodController extends BaseController {
 
     const list = await this.service.listPage(queryData);
     const hasMore = list.length > pageSize;
+    if (hasMore) {
+      list.pop();
+    }
 
     return {
       list,

@@ -31,6 +31,7 @@ export class Order {
 
   @Column({
     comment: '支付状态, // 1 待付款 2 待发货 3 待收货 4 待预约 5 退换/售后',
+    default: 1,
   })
   status: number;
 

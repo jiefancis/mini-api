@@ -18,7 +18,7 @@ import { CollectionModule } from './modules/system/collection/collection.module'
 import { AddressModule } from './modules/system/address/address.module';
 import { HealthModule } from './modules/system/health/health.module';
 import { GroupModule } from './modules/system/group/group.module';
-import { RedisModule } from './modules/redis/redis.module';
+import { RedisConfigModule } from './modules/redis/redis.module';
 
 import { JwtGuard } from './common/guards/auth.guard';
 
@@ -109,7 +109,7 @@ import { JwtGuard } from './common/guards/auth.guard';
     AddressModule,
     HealthModule,
     GroupModule,
-    RedisModule,
+    RedisConfigModule,
   ],
   controllers: [AppController],
   providers: [

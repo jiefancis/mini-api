@@ -663,6 +663,13 @@
   resolved "https://registry.npmmirror.com/@lukeed/csprng/-/csprng-1.1.0.tgz"
   integrity sha512-Z7C/xXCiGWsg0KuKsHTKJxbWhpI3Vs5GwLfOean7MGyVFGqdRgBbAjOCh6u4bbjPc/8MJ2pZmK/0DLdCbivLDA==
 
+"@nestjs-modules/ioredis@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.npmmirror.com/@nestjs-modules/ioredis/-/ioredis-2.0.2.tgz#b1799944c4932e26d24a930caad83cc7af34601d"
+  integrity sha512-8pzSvT8R3XP6p8ZzQmEN8OnY0yWrJ/elFhwQK+PID2zf1SLBkAZ18bDcx3SKQ2atledt0gd9kBeP5xT4MlyS7Q==
+  optionalDependencies:
+    "@nestjs/terminus" "10.2.0"
+
 "@nestjs/cache-manager@^3.0.1":
   version "3.0.1"
   resolved "https://registry.npmmirror.com/@nestjs/cache-manager/-/cache-manager-3.0.1.tgz#893abd4fb8450d2fe6c6692bd71688c45b2d5128"
@@ -745,6 +752,14 @@
     jsonc-parser "3.3.1"
     pluralize "8.0.0"
 
+"@nestjs/terminus@10.2.0":
+  version "10.2.0"
+  resolved "https://registry.npmmirror.com/@nestjs/terminus/-/terminus-10.2.0.tgz#3776ac21d2b1a1b8ce0a60e7f51dd6c498ca1de6"
+  integrity sha512-zPs98xvJ4ogEimRQOz8eU90mb7z+W/kd/mL4peOgrJ/VqER+ibN2Cboj65uJZW3XuNhpOqaeYOJte86InJd44A==
+  dependencies:
+    boxen "5.1.2"
+    check-disk-space "3.4.0"
+
 "@nestjs/testing@^10.0.0":
   version "10.4.15"
   resolved "https://registry.npmmirror.com/@nestjs/testing/-/testing-10.4.15.tgz"
@@ -796,6 +811,40 @@
   version "0.2.0"
   resolved "https://registry.npmmirror.com/@pkgr/core/-/core-0.2.0.tgz"
   integrity sha512-vsJDAkYR6qCPu+ioGScGiMYR7LvZYIXh/dlQeviqoTWNCVfKTLYD/LkNWH4Mxsv2a5vpIRc77FN5DnmK1eBggQ==
+
+"@redis/bloom@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.npmmirror.com/@redis/bloom/-/bloom-1.2.0.tgz#d3fd6d3c0af3ef92f26767b56414a370c7b63b71"
+  integrity sha512-HG2DFjYKbpNmVXsa0keLHp/3leGJz1mjh09f2RLGGLQZzSHpkmZWuwJbAvo3QcRY8p80m5+ZdXZdYOSBLlp7Cg==
+
+"@redis/client@1.6.0":
+  version "1.6.0"
+  resolved "https://registry.npmmirror.com/@redis/client/-/client-1.6.0.tgz#dcf4ae1319763db6fdddd6de7f0af68a352c30ea"
+  integrity sha512-aR0uffYI700OEEH4gYnitAnv3vzVGXCFvYfdpu/CJKvk4pHfLPEy/JSZyrpQ+15WhXe1yJRXLtfQ84s4mEXnPg==
+  dependencies:
+    cluster-key-slot "1.1.2"
+    generic-pool "3.9.0"
+    yallist "4.0.0"
+
+"@redis/graph@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.npmmirror.com/@redis/graph/-/graph-1.1.1.tgz#8c10df2df7f7d02741866751764031a957a170ea"
+  integrity sha512-FEMTcTHZozZciLRl6GiiIB4zGm5z5F3F6a6FZCyrfxdKOhFlGkiAqlexWMBzCi4DcRoyiOsuLfW+cjlGWyExOw==
+
+"@redis/json@1.0.7":
+  version "1.0.7"
+  resolved "https://registry.npmmirror.com/@redis/json/-/json-1.0.7.tgz#016257fcd933c4cbcb9c49cde8a0961375c6893b"
+  integrity sha512-6UyXfjVaTBTJtKNG4/9Z8PSpKE6XgSyEb8iwaqDcy+uKrd/DGYHTWkUdnQDyzm727V7p21WUMhsqz5oy65kPcQ==
+
+"@redis/search@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.npmmirror.com/@redis/search/-/search-1.2.0.tgz#50976fd3f31168f585666f7922dde111c74567b8"
+  integrity sha512-tYoDBbtqOVigEDMAcTGsRlMycIIjwMCgD8eR2t0NANeQmgK/lvxNAvYyb6bZDD4frHRhIHkJu2TBRvB0ERkOmw==
+
+"@redis/time-series@1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmmirror.com/@redis/time-series/-/time-series-1.1.0.tgz#cba454c05ec201bd5547aaf55286d44682ac8eb5"
+  integrity sha512-c1Q99M5ljsIuc4YdaCwfUEXsofakb9c8+Zse2qxTadu8TalLXuAESzLvFAvNVbkmSlvlzIQOLpBCmWI9wTOt+g==
 
 "@sinclair/typebox@^0.27.8":
   version "0.27.8"
@@ -1390,6 +1439,13 @@ ajv@^8.0.0, ajv@^8.9.0:
     json-schema-traverse "^1.0.0"
     require-from-string "^2.0.2"
 
+ansi-align@^3.0.0:
+  version "3.0.1"
+  resolved "https://registry.npmmirror.com/ansi-align/-/ansi-align-3.0.1.tgz#0cdf12e111ace773a86e9a1fad1225c43cb19a59"
+  integrity sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==
+  dependencies:
+    string-width "^4.1.0"
+
 ansi-colors@4.1.3:
   version "4.1.3"
   resolved "https://registry.npmmirror.com/ansi-colors/-/ansi-colors-4.1.3.tgz"
@@ -1616,6 +1672,20 @@ body-parser@1.20.3:
     type-is "~1.6.18"
     unpipe "1.0.0"
 
+boxen@5.1.2:
+  version "5.1.2"
+  resolved "https://registry.npmmirror.com/boxen/-/boxen-5.1.2.tgz#788cb686fc83c1f486dfa8a40c68fc2b831d2b50"
+  integrity sha512-9gYgQKXx+1nP8mP7CzFyaUARhg7D3n1dF/FnErWmu9l6JvGpNUN278h0aSb+QjoiKSWG+iZ3uHrcqk0qrY9RQQ==
+  dependencies:
+    ansi-align "^3.0.0"
+    camelcase "^6.2.0"
+    chalk "^4.1.0"
+    cli-boxes "^2.2.1"
+    string-width "^4.2.2"
+    type-fest "^0.20.2"
+    widest-line "^3.1.0"
+    wrap-ansi "^7.0.0"
+
 brace-expansion@^1.1.7:
   version "1.1.11"
   resolved "https://registry.npmmirror.com/brace-expansion/-/brace-expansion-1.1.11.tgz"
@@ -1776,6 +1846,11 @@ chardet@^0.7.0:
   resolved "https://registry.npmmirror.com/chardet/-/chardet-0.7.0.tgz"
   integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
 
+check-disk-space@3.4.0:
+  version "3.4.0"
+  resolved "https://registry.npmmirror.com/check-disk-space/-/check-disk-space-3.4.0.tgz#eb8e69eee7a378fd12e35281b8123a8b4c4a8ff7"
+  integrity sha512-drVkSqfwA+TvuEhFipiR1OC9boEGZL5RrWvVsOthdcvQNXyCCuKkEiTOTXZ7qxSf/GLwq4GvzfrQD/Wz325hgw==
+
 chokidar@3.6.0, chokidar@^3.5.3:
   version "3.6.0"
   resolved "https://registry.npmmirror.com/chokidar/-/chokidar-3.6.0.tgz"
@@ -1819,6 +1894,11 @@ class-validator@^0.14.1:
     "@types/validator" "^13.11.8"
     libphonenumber-js "^1.10.53"
     validator "^13.9.0"
+
+cli-boxes@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.npmmirror.com/cli-boxes/-/cli-boxes-2.2.1.tgz#ddd5035d25094fce220e9cab40a45840a440318f"
+  integrity sha512-y4coMcylgSCdVinjiDBuR8PCC2bLjyGTwEmPb9NHR/QaNU6EUOXcTY/s6VjGMD6ENSEaeQYHCY0GNGS5jfMwPw==
 
 cli-cursor@^3.1.0:
   version "3.1.0"
@@ -1865,7 +1945,7 @@ clone@^1.0.2:
   resolved "https://registry.npmmirror.com/clone/-/clone-1.0.4.tgz"
   integrity sha512-JQHZ2QMW6l3aH/j6xCqQThY/9OH4D/9ls34cgkUBiEeocRTU04tHfKPBsUK1PqZCUQM7GiA0IIXJSuXHI64Kbg==
 
-cluster-key-slot@^1.1.0:
+cluster-key-slot@1.1.2, cluster-key-slot@^1.1.0:
   version "1.1.2"
   resolved "https://registry.npmmirror.com/cluster-key-slot/-/cluster-key-slot-1.1.2.tgz#88ddaa46906e303b5de30d3153b7d9fe0a0c19ac"
   integrity sha512-RMr0FhtfXemyinomL4hrWcYJxmX6deFdCxpJzhDttxgO1+bcCnkk+9drydLVDmAMG7NE6aN/fl4F7ucU/90gAA==
@@ -2749,6 +2829,11 @@ generate-function@^2.3.1:
   integrity sha512-eeB5GfMNeevm/GRYq20ShmsaGcmI81kIX2K9XQx5miC8KdHaC6Jm0qQ8ZNeGOi7wYB8OsdxKs+Y2oVuTFuVwKQ==
   dependencies:
     is-property "^1.0.2"
+
+generic-pool@3.9.0:
+  version "3.9.0"
+  resolved "https://registry.npmmirror.com/generic-pool/-/generic-pool-3.9.0.tgz#36f4a678e963f4fdb8707eab050823abc4e8f5e4"
+  integrity sha512-hymDOu5B53XvN4QT9dBmZxPX4CWhBPPLguTZ9MMFeFa/Kg0xWVfylOVNlJji/E7yTZWFd/q9GO5TxDLq156D7g==
 
 gensync@^1.0.0-beta.2:
   version "1.0.0-beta.2"
@@ -4497,6 +4582,18 @@ redis-parser@^3.0.0:
   dependencies:
     redis-errors "^1.0.0"
 
+redis@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.npmmirror.com/redis/-/redis-4.7.0.tgz#b401787514d25dd0cfc22406d767937ba3be55d6"
+  integrity sha512-zvmkHEAdGMn+hMRXuMBtu4Vo5P6rHQjLoHftu+lBqq8ZTA3RCVC/WzD790bkKKiNFp7d5/9PcSD19fJyyRvOdQ==
+  dependencies:
+    "@redis/bloom" "1.2.0"
+    "@redis/client" "1.6.0"
+    "@redis/graph" "1.1.1"
+    "@redis/json" "1.0.7"
+    "@redis/search" "1.2.0"
+    "@redis/time-series" "1.1.0"
+
 reflect-metadata@^0.2.0:
   version "0.2.2"
   resolved "https://registry.npmmirror.com/reflect-metadata/-/reflect-metadata-0.2.2.tgz"
@@ -4861,7 +4958,7 @@ string-length@^4.0.1:
     char-regex "^1.0.2"
     strip-ansi "^6.0.0"
 
-"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.0.0, string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.2, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.npmmirror.com/string-width/-/string-width-4.2.3.tgz"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -5394,6 +5491,13 @@ which@^2.0.1:
   dependencies:
     isexe "^2.0.0"
 
+widest-line@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npmmirror.com/widest-line/-/widest-line-3.1.0.tgz#8292333bbf66cb45ff0de1603b136b7ae1496eca"
+  integrity sha512-NsmoXalsWVDMGupxZ5R08ka9flZjjiLvHVAWYOKtiKM8ujtZWr9cRffak+uSE48+Ob8ObalXpwyeUiyDD6QFgg==
+  dependencies:
+    string-width "^4.0.0"
+
 word-wrap@^1.2.5:
   version "1.2.5"
   resolved "https://registry.npmmirror.com/word-wrap/-/word-wrap-1.2.5.tgz"
@@ -5448,6 +5552,11 @@ y18n@^5.0.5:
   version "5.0.8"
   resolved "https://registry.npmmirror.com/y18n/-/y18n-5.0.8.tgz"
   integrity sha512-0pfFzegeDWJHJIAmTLRP2DwHjdF5s7jo9tuztdQxAhINCdvS+3nGINqPd00AphqJR/0LhANUS6/+7SCb98YOfA==
+
+yallist@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmmirror.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
+  integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
 
 yallist@^3.0.2:
   version "3.1.1"

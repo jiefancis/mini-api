@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 
 import { OrderService } from './order.service';
@@ -21,16 +21,26 @@ export class OrderController extends BaseController {
   }
 
   @Post('v1/create')
-  async create(@Body() data: CreateOrderDto) {
+  async createOrder(@Body() data: CreateOrderDto, @Req() req) {
     const payload = plainToClass(CreateOrderDto, data);
-    const res = await this.service.create(payload);
-    if (res) {
-      console.log('create-order::', res);
-      const orderNo = generateUUID();
+    const order_no = generateUUID();
+    const user_id = req.session.userId;
+
+    const order = await this.service.createOrder({
+      ...payload,
+      order_no,
+      user_id,
+    });
+    if (order) {
+      console.log('create-order::', order);
+
       return {
-        orderNo,
+        orderId: order.id,
+        orderNo: order_no,
       };
     }
+
+    return null;
   }
 
   @Post('v1/update')

@@ -15,6 +15,13 @@ export class Good extends BaseEntity {
   })
   name: string;
 
+  @Column({
+    type: 'varchar',
+    length: 255,
+    comment: '商品图片',
+  })
+  image: string;
+
   @Column({ comment: '商品描述', default: '' })
   description: string;
 

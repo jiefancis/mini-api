@@ -2,6 +2,8 @@
 export const RedisKeyFormat = Object.freeze({
   UserCache: 'mini:user:%s',
   UserToken: 'mini:user:access_token:%s',
+
+  OrderPayExpire: 'mini:order:pay:expire:%s', // 订单支付过期
 });
 
 export const RedisExpire = Object.freeze({
