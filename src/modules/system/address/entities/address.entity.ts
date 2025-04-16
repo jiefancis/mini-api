@@ -1,5 +1,5 @@
 import { Column, Entity } from 'typeorm';
-import { BaseEntity } from './base.entity';
+import { BaseEntity } from 'src/entities/base.entity';
 @Entity()
 export class Address extends BaseEntity {
   @Column({ type: 'varchar', length: 50, comment: '收货人姓名' })

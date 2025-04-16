@@ -1,4 +1,6 @@
+import { NotFoundException } from '@nestjs/common';
 import { Repository } from 'typeorm';
+import { ExceptionCodes } from 'src/constants/exception';
 
 export class BaseService {
   repository: Repository<any>;
@@ -22,24 +24,42 @@ export class BaseService {
 
   async delete(id) {
     if (this.repository) {
-      return await this.repository.delete(id);
+      const result = await this.findOne(id);
+      if (!result) {
+        // return {
+        //   message: '删除失败，未找到该记录',
+        // };
+        throw new NotFoundException(ExceptionCodes.RECORD_NOT_FOUND);
+      }
+
+      result.isDeleted = true;
+      await this.repository.save(result);
+      return {
+        message: '删除成功',
+      };
     }
   }
 
   async findOne(id) {
     if (this.repository) {
-      return await this.repository.findOne({ where: { id } });
+      return await this.repository.findOne({ where: { id, isDeleted: false } });
     }
   }
 
   async findAll() {
     if (this.repository) {
-      return await this.repository.find();
+      return await this.repository.find({ where: { isDeleted: false } });
     }
   }
 
   async listPage(params) {
     if (this.repository) {
+      if (!params.where) {
+        params.where = { isDeleted: false };
+      } else if ([null, undefined].includes(params.where.isDeleted)) {
+        params.where.isDeleted = false;
+      }
+
       return await this.repository.find({ ...params });
       // const { offset, pageSize, order } = params;
 

@@ -1,16 +1,7 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from './base.entity';
 @Entity()
-export class User {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class User extends BaseEntity {
   @Column({ unique: true })
   nickname: string; // 昵称
 
@@ -32,17 +23,17 @@ export class User {
   @Column({ default: false })
   isDeleted: boolean; //是否注销 物理标记
 
-  @CreateDateColumn({
-    type: 'timestamp',
-    comment: '创建时间',
-    nullable: true,
-  })
-  createdAt: Date;
+  // @CreateDateColumn({
+  //   type: 'timestamp',
+  //   comment: '创建时间',
+  //   nullable: true,
+  // })
+  // createdAt: Date;
 
-  @UpdateDateColumn({
-    nullable: true,
-    type: 'timestamp',
-    comment: '更新时间',
-  })
-  updatedAt: Date;
+  // @UpdateDateColumn({
+  //   nullable: true,
+  //   type: 'timestamp',
+  //   comment: '更新时间',
+  // })
+  // updatedAt: Date;
 }

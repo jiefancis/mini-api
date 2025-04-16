@@ -1,16 +1,7 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  CreateDateColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-
+import { Column, Entity } from 'typeorm';
+import { BaseEntity } from './base.entity';
 @Entity()
-export class Shop {
-  @PrimaryGeneratedColumn()
-  id: number;
-
+export class Shop extends BaseEntity {
   @Column({ type: 'varchar', length: 50, nullable: false })
   name: string;
 
@@ -39,10 +30,4 @@ export class Shop {
 
   @Column({ nullable: true, comment: '店铺纬度' }) //type: 'long', length: 50,
   shop_lat: number;
-
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
 }

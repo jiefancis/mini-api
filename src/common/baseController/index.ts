@@ -20,29 +20,29 @@ export class BaseController {
     return this.service.create(data);
   }
 
-  @Post('v1/listPage')
-  async listPage(@Body() data: ListPageDto) {
-    const { pageNo, pageSize, order, sort, ...restData } = data;
-    const offset = (pageNo - 1) * pageSize;
+  // @Post('v1/listPage')
+  // async listPage(@Body() data: ListPageDto) {
+  //   const { pageNo, pageSize, order, sort, ...restData } = data;
+  //   const offset = (pageNo - 1) * pageSize;
 
-    const orderBy = {};
-    if (sort) {
-      orderBy[sort] = order || 'desc';
-    }
+  //   const orderBy = {};
+  //   if (sort) {
+  //     orderBy[sort] = order || 'desc';
+  //   }
 
-    let where = {};
-    if (!_.isEmpty(restData)) {
-    }
+  //   let where = {};
+  //   if (!_.isEmpty(restData)) {
+  //   }
 
-    const queryData = {
-      skip: offset,
-      take: pageSize,
-      order: orderBy,
-      // ...restData,
-    };
+  //   const queryData = {
+  //     skip: offset,
+  //     take: pageSize,
+  //     order: orderBy,
+  //     // ...restData,
+  //   };
 
-    return await this.service.listPage(queryData);
-  }
+  //   return await this.service.listPage(queryData);
+  // }
 
   @Get('v1/all')
   async findAll() {
