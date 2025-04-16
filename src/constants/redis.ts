@@ -9,4 +9,6 @@ export const RedisKeyFormat = Object.freeze({
 export const RedisExpire = Object.freeze({
   UserCache: 1000 * 60 * 60 * 24 * 7, // 7天
   UserToken: 60 * 60, // 1小时
+
+  OrderPayExpire: 15 * 60, // 15分钟
 });

@@ -14,7 +14,6 @@ export class OrderController extends BaseController {
     super(service);
   }
 
-  @Public()
   @Get('v1/list')
   async list() {
     return this.service.findAll();
@@ -41,6 +40,11 @@ export class OrderController extends BaseController {
     }
 
     return null;
+  }
+
+  @Post('v1/cancel')
+  async cancelOrder(@Body() data) {
+    return this.service.cancelOrder(data.id);
   }
 
   @Post('v1/update')

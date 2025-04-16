@@ -6,7 +6,7 @@ import Redis from 'ioredis';
 
 import { BaseService } from 'src/common/baseService';
 import { Order } from 'src/entities/order.entity';
-import { RedisKeyFormat } from 'src/constants/redis';
+import { RedisKeyFormat, RedisExpire } from 'src/constants/redis';
 import { utilFormat } from 'src/utils/format';
 import { OrderStatus } from 'src/constants/order';
 
@@ -57,14 +57,7 @@ export class OrderService extends BaseService {
 
     const redisKey = utilFormat(RedisKeyFormat.OrderPayExpire, order.id);
     // 设置订单过期时间为 15 分钟（900 秒）
-    // await this.redis.setex(redisKey, 10, 'unpaid');
-    // // 设置 15 分钟过期的键
-    await this.redis.set(
-      redisKey,
-      'pending',
-      'EX',
-      15 * 60, // 下单后15分钟支付
-    );
+    await this.redis.setex(redisKey, RedisExpire.OrderPayExpire, 'unpaid');
 
     return order;
   }
