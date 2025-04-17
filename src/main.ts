@@ -5,11 +5,11 @@ import { PostStatusInterceptor } from './common/interceptors/postStatus.intercep
 import { HttpExceptionFilter } from './common/filters/http-exception.filter';
 import { ValidationPipe } from '@nestjs/common';
 import { API_PREFIX } from 'src/config/api';
-// import { JwtGuard } from 'src/common/guards/auth.guard';
 import * as session from 'express-session';
+import logger from 'src/config/logger';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { logger });
   // 全局拦截器
   app.useGlobalInterceptors(new PostStatusInterceptor());
 

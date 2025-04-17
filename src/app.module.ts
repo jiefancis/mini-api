@@ -35,18 +35,6 @@ import { JwtGuard } from './common/guards/auth.guard';
 
 @Module({
   imports: [
-    // TypeOrmModule.forFeature([
-    //   Address,
-    //   Category,
-    //   Collection,
-    //   Coupon,
-    //   GoodGroup,
-    //   Group,
-    //   Good,
-    //   Order,
-    //   Shop,
-    //   User,
-    // ]),
     // 缓存
     CacheModule.register({
       isGlobal: true, // 配置全局缓存
