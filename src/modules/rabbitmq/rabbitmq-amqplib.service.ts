@@ -1,55 +1,25 @@
-// import { Injectable, OnModuleInit } from '@nestjs/common';
-// import amqp from 'amqplib';
-
-// @Injectable()
-// export class RabbitMQService implements OnModuleInit {
-//   private connection;
-//   private channel;
-
-//   async onModuleInit() {
-//     try {
-//       // 建立与 RabbitMQ 服务器的连接
-//       this.connection = await amqp.connect('amqp://localhost');
-//       // 创建一个通道
-//       this.channel = await this.connection.createChannel();
-//       // 声明一个队列，如果队列不存在则创建
-//       await this.channel.assertQueue('test-queue');
-//       // 开始消费队列中的消息
-//       this.consumeMessages();
-//     } catch (error) {
-//       console.error('Error connecting to RabbitMQ:', error);
-//     }
-//   }
-
-//   sendMessage(queue: string, message: string) {
-//     // 向指定队列发送消息
-//     this.channel.sendToQueue(queue, Buffer.from(message));
-//     console.log(`Message "${message}" sent to queue "${queue}".`);
-//   }
-
-//   async consumeMessages() {
-//     // 从队列中消费消息
-//     this.channel.consume('test-queue', (msg) => {
-//       if (msg) {
-//         console.log(`Received message: ${msg.content.toString()}`);
-//         // 确认消息已被处理
-//         this.channel.ack(msg);
-//       }
-//     });
-//   }
-// }
-
-import { Injectable, OnModuleInit } from '@nestjs/common';
+import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import * as amqp from 'amqplib';
 import { RabbitMQ } from 'src/constants/rabbitmq';
 
 @Injectable()
-export class RabbitMQService implements OnModuleInit {
+export class RabbitMQService implements OnModuleInit, OnModuleDestroy {
   private connection;
   private channel;
   private connectUri = `amqp://${process.env.RABBITMQ_USERNAME}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_HOST}`;
 
   async onModuleInit() {
+    this.initRabbitMQ();
+  }
+
+  async onModuleDestroy() {
+    console.log('关闭连接');
+    // 关闭连接
+    await this.connection.close();
+    await this.channel.close();
+  }
+
+  async initRabbitMQ() {
     try {
       // 建立与 RabbitMQ 服务器的连接
       this.connection = await amqp.connect(this.connectUri);
@@ -83,8 +53,21 @@ export class RabbitMQService implements OnModuleInit {
 
       // // 开始消费主队列中的消息
       // this.consumeMessages();
+
       // 开始监听死信队列中的过期消息
       this.consumeExpiredMessages();
+      console.log('RabbitMQ 连接已建立');
+      // 监听连接关闭事件
+      this.connection.on('close', async () => {
+        console.log('RabbitMQ 连接已关闭，尝试重新连接...');
+        await this.initRabbitMQ();
+      });
+
+      // 监听连接错误事件
+      this.connection.on('error', async (err) => {
+        console.error('RabbitMQ 连接出现错误:', err);
+        await this.initRabbitMQ();
+      });
     } catch (error) {
       console.error('Error connecting to RabbitMQ:', error);
     }

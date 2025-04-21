@@ -1,3 +1,15 @@
+# 技术和工具
+
+- redis
+- 日志 winston
+- 消息队列 RabbitMQ
+- 邮箱服务 nodemailer
+- 定时任务 @nestjs/schedule（node-schedule）
+- 登录 jsonwebtoken
+- 不同请求之间保持用户状态 express-session
+- prom-client 监控
+- docker
+
 # 功能
 
 - 用户注册 ☑️
