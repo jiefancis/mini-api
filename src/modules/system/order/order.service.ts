@@ -9,6 +9,7 @@ import { Order } from 'src/entities/order.entity';
 import { RedisKeyFormat, RedisExpire } from 'src/constants/redis';
 import { utilFormat } from 'src/utils/format';
 import { OrderStatus } from 'src/constants/order';
+import { RabbitMQService } from 'src/modules/rabbitmq/rabbitmq-amqplib.service';
 
 @Injectable()
 export class OrderService extends BaseService {
@@ -16,6 +17,7 @@ export class OrderService extends BaseService {
     @InjectRepository(Order)
     readonly repository: Repository<Order>,
     @InjectRedis() private readonly redis: Redis,
+    private readonly rabbitMQService: RabbitMQService,
   ) {
     super(repository);
   }
@@ -58,6 +60,8 @@ export class OrderService extends BaseService {
     const redisKey = utilFormat(RedisKeyFormat.OrderPayExpire, order.id);
     // 设置订单过期时间为 15 分钟（900 秒）
     await this.redis.setex(redisKey, RedisExpire.OrderPayExpire, 'unpaid');
+
+    await this.rabbitMQService.sendMessage(data);
 
     return order;
   }

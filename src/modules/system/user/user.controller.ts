@@ -31,6 +31,11 @@ export class UserController extends BaseController {
     super(service);
   }
 
+  @Get('v1/tz')
+  async tz() {
+    return this.service.tz();
+  }
+
   // 用户注册
   @Post('v1/register')
   async createUser(@Body() data: CreateUserDto) {

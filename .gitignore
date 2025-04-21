@@ -3,6 +3,10 @@
 /node_modules
 /build
 /src/entities-bak
+/src/modules/system/group_order*
+/src/modules/rabbitmq/rabbitmq.module.ts
+/src/modules/rabbitmq/rabbitmq.service.ts
+/src/modules/rabbitmq/readme.md
 mysql.md
 
 # Logs

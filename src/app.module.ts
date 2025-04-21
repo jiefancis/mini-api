@@ -19,6 +19,7 @@ import { AddressModule } from './modules/system/address/address.module';
 import { HealthModule } from './modules/system/health/health.module';
 import { GroupModule } from './modules/system/group/group.module';
 import { RedisConfigModule } from './modules/redis/redis.module';
+import { GroupOrderModule } from './modules/system/group_order/group_order.module';
 
 import { JwtGuard } from './common/guards/auth.guard';
 
@@ -74,10 +75,12 @@ import { JwtGuard } from './common/guards/auth.guard';
         // ],
         synchronize: process.env.NODE_ENV === 'development',
         // timezone: 'Asia/Shanghai', // 根据实际情况设置时区
+        timezone: '+08:00', // 使用UTC格式设置时区
         extra: {
           // sql_mode:
           //   'ONLY_FULL_GROUP_BY,ERROR_FOR_DIVISION_BY_ZERO,NO_ZERO_IN_DATE',
           sql_mode: 'NO_ENGINE_SUBSTITUTION', // 移除严格模式
+          timezone: '+08:00', // 使用UTC格式设置时区
         },
         // extra: {
         //   connectionLimit: 10,
@@ -98,6 +101,7 @@ import { JwtGuard } from './common/guards/auth.guard';
     HealthModule,
     GroupModule,
     RedisConfigModule,
+    // GroupOrderModule,
   ],
   controllers: [AppController],
   providers: [

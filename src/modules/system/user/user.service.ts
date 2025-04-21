@@ -12,6 +12,13 @@ export class UserService extends BaseService {
     super(repository);
   }
 
+  async tz() {
+    const result = await this.repository.query(
+      'SELECT @@session.time_zone AS tz',
+    );
+    console.log('当前会话时区:', result[0].tz); // 应输出 +08:00
+    return result[0].tz;
+  }
   async queryAllUser() {
     const list = await this.repository.find({ where: { isDeleted: false } });
 

@@ -49,6 +49,12 @@ export class BaseService {
   async findAll() {
     if (this.repository) {
       return await this.repository.find({ where: { isDeleted: false } });
+      // list.forEach((item) => {
+      //   item.createdAt = new Date(item.createdAt).toLocaleString();
+      //   // item.updatedAt = item.updatedAt.toISOString();
+      // });
+      // console.log('查询list', list.length, list[list.length - 1].createdAt);
+      // return list;
     }
   }
 
